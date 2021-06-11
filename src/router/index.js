@@ -1,0 +1,51 @@
+import Router from 'vue-router'
+const routes=[
+    {
+        name:'index',
+        path:'/',
+        component:()=>import('../components/index'),
+        children:[
+            {
+                name:'home',
+                path:'home',
+                component:()=>import('../components/home')
+            },
+            {
+                name:'bpmn',
+                path:'bpmn',
+                component:()=>import('../components/bpmn')
+            },
+            {
+                name:'age',
+                path:'age',
+                component:()=>import('../components/age')
+            },
+            {
+                name:'list',
+                path:'list',
+                component:()=>import('../components/List'),
+                children:[
+                    {
+                        name:'list1',
+                        path:'list1',
+                        component:()=>import('../components/List1')
+                    },
+                    {
+                        name:'list2',
+                        path:'list2',
+                        component:()=>import('../components/List2')
+                    },
+                    {
+                        name:'list3',
+                        path:'list3',
+                        component:()=>import('../components/List3')
+                    },
+                ]
+            },
+        ]
+    },
+]
+export default new Router({
+  routes: routes,
+  mode:'history'
+})
