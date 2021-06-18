@@ -6,7 +6,7 @@
     <button @click="getxml">获取xml</button>
     <div class="containers">
       <div class="canvas" ref="canvas"></div>
-      <div id="js-properties-panel" class="panel"></div>
+      <!-- <div id="js-properties-panel" class="panel"></div> -->
       <model ref="model" @ok="ok"></model>
     </div>
   </a-spin>
@@ -20,6 +20,7 @@
   import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda'
   // 这里是直接引用了xml字符串
   import { xmlStr } from './mock/xmlStr' 
+  import CustomModeler from './customBpmn';
   import model from './model.vue';
   export default {
     name: '',
@@ -46,7 +47,6 @@
     methods: {
       ok(form){
         var moddle = this.bpmnModeler.get('modeling');
-        debugger
         moddle.updateProperties(this.getShape(form.id), {
           ...form
         })
@@ -72,20 +72,19 @@
         // 获取到属性ref为“canvas”的dom节点
         const canvas = this.$refs.canvas
         // 建模
-        this.bpmnModeler = new BpmnModeler({
+        this.bpmnModeler = new CustomModeler({
           container: canvas,
-          //添加右侧控制板
-          propertiesPanel: {
-            parent: '#js-properties-panel'
-          },
-          additionalModules:[
-            {
-              labelEditingProvider:["value",'']
-            }
-          ],
+          // //添加右侧控制板
+          // propertiesPanel: {
+          //   parent: '#js-properties-panel'
+          // },
+          // additionalModules:[
+          //   {
+          //     labelEditingProvider:["value",'']
+          //   }
+          // ],
           additionalModules: [
-            {zoomScroll: ["value", ""],},
-            {bendpoints: ["value", ""],}
+            // CustomModeler
             // // 右侧工具栏属性
             // propertiesProviderModule,
             // // 右侧工具栏
@@ -185,7 +184,6 @@
       },
        // 当图发生改变的时候会调用这个函数，这个data就是图的xml
       setEncoded(link, name, data) {
-          debugger
           // 把字符串转换为URI，下载要用到的
           const encodedData = encodeURIComponent(data)
           // 下载图的具体操作,改变a的属性，className令a标签可点击，href令能下载，download是下载的文件的名字
@@ -204,7 +202,6 @@
         const events = ['shape.added', 'shape.move.end', 'shape.removed', 'connect.end', 			'connect.move']
         events.forEach(function(event) {
           that.bpmnModeler.on(event, e => {
-            debugger
             // console.log(event, e)
             var elementRegistry = bpmnjs.get('elementRegistry')
             var shape = e.element ? elementRegistry.get(e.element.id) : e.shape

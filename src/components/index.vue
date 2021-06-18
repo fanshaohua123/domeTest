@@ -75,6 +75,11 @@ export default {
         },
         {
           key:4,
+          url:'/bpmn1',
+          name:'bpmn1'
+        },
+        {
+          key:5,
           url:'/bpmn',
           name:'bpmn'
         },
@@ -111,7 +116,6 @@ export default {
   watch:{
     $route:{
       handler(route) {
-        console.log(route);
         this.$store.commit('setActivePage',route.fullPath)
         this.$store.commit('add',route)
       },

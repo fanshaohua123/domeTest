@@ -1,17 +1,13 @@
-// devServer: {
-//   overlay: {
-//      warnings: false,
-//      errors: false
-//   },
-//   lintOnSave: false
-// }
+
 module.exports = {
   devServer: {
-      disableHostCheck: true,
-
+    overlay: {
+       warnings: false,
+       errors: false
+    },
+    // lintOnSave: false
   },
   publicPath: process.env.NODE_ENV === 'production'
     ? './'
     : '/',
-  lintOnSave: false,
 }

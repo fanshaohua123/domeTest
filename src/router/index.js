@@ -11,9 +11,14 @@ const routes=[
                 component:()=>import('../components/home')
             },
             {
+                name:'bpmn1',
+                path:'bpmn1',
+                component:()=>import('../components/bpmn')
+            },
+            {
                 name:'bpmn',
                 path:'bpmn',
-                component:()=>import('../components/bpmn')
+                component:()=>import('../components/BPMN/bpmn')
             },
             {
                 name:'age',

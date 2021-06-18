@@ -5,6 +5,7 @@ import 'ant-design-vue/dist/antd.css';
 import Router from 'vue-router';
 import router from './router';
 import axios from 'axios';
+import './css/app.css'
 Vue.prototype.axios = axios;
 // 左边工具栏以及编辑节点的样式
 import 'bpmn-js/dist/assets/diagram-js.css' 
