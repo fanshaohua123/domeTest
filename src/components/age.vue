@@ -1,49 +1,25 @@
 <template>
   <div>
-    age
-    <a-input v-model="value"></a-input>
+    <div>{{ $store.state.count }}</div>
+    <div>getters.count{{ $store.getters.countChange }}</div>
+    <button @click="add">+1</button>
+    <button @click="dispatchAdd">+1</button>
   </div>
 </template>
 <script>
-const treeData = [
-  {
-    id: "1",
-    isLeaf: false,
-    title: "财务部",
-    slots: { icon: 'meh' },
-    children:[
-      {
-        id: "1-1",
-        isLeaf: false,
-        title: "财务部1",
-        slots: { icon: 'meh' },
-        slotScope:{title:'title'}
-      },
-      {
-        id: "1-2",
-        isLeaf: true,
-        title: "财务部2",
-        slots: { icon: 'meh' },
-      },
-    ]
-  }
-];
-
 export default {
-  name:'age',
+  name: "age",
   data() {
-    return {
-      value:'',
-      treeData,
-    };
+    return {};
   },
   methods: {
-    onSelect(selectedKeys, info) {
-      console.log('selected', selectedKeys, info);
+    add() {
+      this.$store.commit("addCount");
     },
-    onCheck(checkedKeys, info) {
-      console.log('onCheck', checkedKeys, info);
+    dispatchAdd() {
+      this.$store.dispatch("asyncAddCount");
     },
   },
+  mounted() {},
 };
 </script>

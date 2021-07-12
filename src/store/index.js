@@ -1,18 +1,22 @@
 import vue from 'vue';
-import vuex from 'vuex';
+import vuex from '../vuex';
 import router from '../router';
 import {last} from 'lodash';
 vue.use(vuex)
 export default new vuex.Store(
     {
         state: {
+            count:1,
             // 当前点击的页面
             activePage:'',
-            //点击过菜单的集合
+            // //点击过菜单的集合
             pageList:[],
             delTabs:[]
         },
         mutations: {
+            addCount(state){
+                state.count++
+            },
             setActivePage(state,data){
                 state.activePage=data
             },
@@ -41,6 +45,18 @@ export default new vuex.Store(
                 // .finally(()=>{
                 //     this.dustbin.splice(0)
                 // })
+            }
+        },
+        actions: {
+            asyncAddCount({commit},data){
+                setTimeout(()=>{
+                    commit('addCount')
+                },2000)
+            }
+        },
+        getters: {
+            countChange(state){
+                return state.count+2
             }
         }
     }

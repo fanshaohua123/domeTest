@@ -1,10 +1,45 @@
 import Router from 'vue-router'
+import vue from 'vue';
+import vueRouter from '../components/vue-router'
+vue.use(Router)
+vue.use(vueRouter)
 const routes=[
     {
         name:'index',
         path:'/',
         component:()=>import('../components/index'),
         children:[
+            {
+                name:'router',
+                path:'router',
+                component:()=>import('../components/router'),
+                children:[
+                    {
+                        name:'home',
+                        path:'/router/home',
+                        component:()=>import('../components/age')
+                    },
+                    {
+                        name:'list',
+                        path:'/router/list',
+                        component:()=>import('../components/List1'),
+                        beforeEnter:(to, from, next) => {
+                            console.log(to);                            
+                            console.log(from);                            
+                            setTimeout(()=>{
+                                next()
+                            },3000)                         
+                        },
+                        beforeLeave:(to, from, next) => {
+                            console.log(to);                            
+                            console.log(from);                            
+                            setTimeout(()=>{
+                                // next()
+                            },3000)                         
+                        },
+                    },
+                ]
+            },
             {
                 name:'home',
                 path:'home',
@@ -53,4 +88,7 @@ const routes=[
 export default new Router({
   routes: routes,
   mode:'history'
+})
+export const router_custom=  new vueRouter({
+  routes: routes,
 })

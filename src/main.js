@@ -3,7 +3,7 @@ import App from './App.vue'
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import Router from 'vue-router';
-import router from './router';
+import router,{router_custom as vueRouter}from './router';
 import axios from 'axios';
 import './css/app.css'
 Vue.prototype.axios = axios;
@@ -21,7 +21,6 @@ Router.prototype.push = function push(location) {
    return originalPush.call(this, location).catch(err => err)
 }
 Vue.use(Antd);
-Vue.use(Router);
 Vue.config.productionTip = false
 import store from './store';
 Vue.mixin({
@@ -35,5 +34,5 @@ new Vue({
   render: h => h(App),
   store,
   router,
-  
+  vueRouter
 }).$mount('#app')

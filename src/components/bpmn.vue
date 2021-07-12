@@ -13,13 +13,13 @@
 </template>
 <script>
   // 引入相关的依赖
-  import BpmnModeler from 'bpmn-js/lib/Modeler'
-  // 引入右侧相关配置
-  import propertiesPanelModule from 'bpmn-js-properties-panel'
-  import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda'
-  import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda'
+  // import BpmnModeler from 'bpmn-js/lib/Modeler'
+  // // 引入右侧相关配置
+  // import propertiesPanelModule from 'bpmn-js-properties-panel'
+  // import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda'
+  // import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda'
   // 这里是直接引用了xml字符串
-  import { xmlStr } from './mock/xmlStr' 
+  // import { xmlStr } from './mock/xmlStr' 
   import CustomModeler from './customBpmn';
   import model from './model.vue';
   export default {
@@ -151,20 +151,20 @@
       },
 
       addBpmnListener () {
-        const that = this
+        // const that = this
       // 获取a标签dom节点
-        const downloadLink = this.$refs.saveDiagram
-        const downloadSvgLink = this.$refs.saveSvg
+        // const downloadLink = this.$refs.saveDiagram
+        // const downloadSvgLink = this.$refs.saveSvg
         // 给图绑定事件，当图有发生改变就会触发这个事件
         this.bpmnModeler.on('commandStack.changed', function (a,b,c){
           console.log(a,b,c);
           return
-          that.saveDiagram(function(err, xml) {
-              that.setEncoded(downloadLink, 'diagram.bpmn', err ? null : xml)
-          })
-          that.saveSVG(function(err, svg) {
-              that.setEncoded(downloadSvgLink, 'diagram.svg', err ? null : svg)
-          })
+          // that.saveDiagram(function(err, xml) {
+          //     that.setEncoded(downloadLink, 'diagram.bpmn', err ? null : xml)
+          // })
+          // that.saveSVG(function(err, svg) {
+          //     that.setEncoded(downloadSvgLink, 'diagram.svg', err ? null : svg)
+          // })
         })
       },
        // 下载为SVG格式,done是个函数，调用的时候传入的
@@ -187,7 +187,7 @@
           // 把字符串转换为URI，下载要用到的
           const encodedData = encodeURIComponent(data)
           // 下载图的具体操作,改变a的属性，className令a标签可点击，href令能下载，download是下载的文件的名字
-          let xmlFile = new File([data], 'test.bpmn')
+          // let xmlFile = new File([data], 'test.bpmn')
           if (data) {
             link.className = 'active'
             link.href = 'data:application/bpmn20-xml;charset=UTF-8,' + encodedData
@@ -205,7 +205,7 @@
             // console.log(event, e)
             var elementRegistry = bpmnjs.get('elementRegistry')
             var shape = e.element ? elementRegistry.get(e.element.id) : e.shape
-            // console.log(shape)
+            console.log(shape)
             if (event === 'shape.added') {
               console.log('新增了shape')
             } else if (event === 'shape.move.end') {
@@ -218,22 +218,22 @@
       },
       addEventBusListener () {
         return
-        let that = this
-        const eventBus = this.bpmnModeler.get('eventBus') // 需要使用eventBus
-        const eventTypes = ['element.click', 'element.changed'] // 需要监听的事件集合
-        eventTypes.forEach(function(eventType) {
-          eventBus.on(eventType, function(e) {
-            if (!e || e.element.type == 'bpmn:Process') return 
-            //获取指定id元素的信息
-            if (eventType === 'element.changed') {
-              that.elementChanged(eventType, e)
-            } else if (eventType === 'element.click') {
-              console.log(e);
-              that.select=e
-              that.$refs.model.showDrawer(e)
-            }
-            })
-        })
+        // let that = this
+        // const eventBus = this.bpmnModeler.get('eventBus') // 需要使用eventBus
+        // const eventTypes = ['element.click', 'element.changed'] // 需要监听的事件集合
+        // eventTypes.forEach(function(eventType) {
+        //   eventBus.on(eventType, function(e) {
+        //     if (!e || e.element.type == 'bpmn:Process') return 
+        //     //获取指定id元素的信息
+        //     if (eventType === 'element.changed') {
+        //       that.elementChanged(eventType, e)
+        //     } else if (eventType === 'element.click') {
+        //       console.log(e);
+        //       that.select=e
+        //       that.$refs.model.showDrawer(e)
+        //     }
+        //     })
+        // })
       },
       elementChanged(eventType, e) {
         var shape = this.getShape(e.element.id)
